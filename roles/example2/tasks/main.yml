@@ -1,0 +1,22 @@
+
+---
+- name: create user DevOps
+  user:
+    name: DevOps
+    group: sudo
+    shell: /bin/bash
+    password: '$6$B.AxpK8zHtpXIZPP$kStM3EB2ncV0JqDWeI46HGOD4HkBirMdWbLnV6qEwp/p/ZxqsmpafCBcXI825pTTwx4mwQokPXW7QTPy2poXk1'
+    generate_ssh_key: yes
+
+- name: ssh-key connect
+  copy:
+    src: /home/god/.ssh/id_rsa.pub
+    dest: /home/DevOps/.ssh/rsa_a
+
+- name:
+  shell: cat /home/DevOps/.ssh/rsa_a >> /home/DevOps/.ssh/authorized_keys
+
+- name: sudo no password
+  ansible.builtin.lineinfile:
+    path: /etc/sudoers
+    line: 'DevOps ALL=(ALL) NOPASSWD:ALL' 

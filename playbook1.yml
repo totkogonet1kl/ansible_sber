@@ -1,9 +1,15 @@
 
 ---
-- name: ansible tested example
+- name: example1
   hosts: B
   become: yes
 
-
   roles:
     - example1
+
+
+- name: exaple2
+  hosts: C
+  become: yes
+  roles:
+    - example2
