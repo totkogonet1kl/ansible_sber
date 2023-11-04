@@ -1,0 +1,9 @@
+
+---
+- name: ansible tested example
+  hosts: B
+  become: yes
+
+
+  roles:
+    - example1
