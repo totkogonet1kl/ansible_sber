@@ -1,0 +1,32 @@
+
+---
+
+
+- name: install psql in C
+  apt:
+    name: ['postgresql','python3-psycopg2']
+    state: latest
+
+
+- name: ping myauth
+  community.postgresql.postgresql_ping:
+    db: myauth
+    login_host: 192.168.25.133
+    login_user: developer
+  register: result
+
+- debug:
+    var: result
+
+
+
+- name: ping myapp
+  community.postgresql.postgresql_ping:
+    db: myapp
+    login_host: 192.168.25.133
+    login_user: developer
+  register: result
+
+
+- debug:
+    var: result

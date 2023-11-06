@@ -3,7 +3,6 @@
 - name: access for develor on DB
   ansible.builtin.lineinfile:
     path: /etc/postgresql/14/main/pg_hba.conf
-   # regexp: "local   all             postgres                                peer"
     line: "host   myauth             developer          192.168.25.134/32                      trust"
   notify: restart psql
 
@@ -11,6 +10,5 @@
 - name: access for develor on DB
   ansible.builtin.lineinfile:
     path: /etc/postgresql/14/main/pg_hba.conf
-   # regexp: "local   all             postgres                                peer"
     line: "host   myapp             developer             192.168.25.134/32                     trust"
   notify: restart psql
