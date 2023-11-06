@@ -13,7 +13,7 @@
 
   roles:
     - example2
-    - example3
+    - example3_1
 
 - name: 'Создание БД myapp и myauth и пользователя developer. Настройка доступа к developer только с "С"'
   hosts: B

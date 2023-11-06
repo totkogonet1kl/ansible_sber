@@ -1,17 +1,15 @@
 
 ---
-- name: create db myapp
+- name: 'создание БД myapp и myauth'
   community.postgresql.postgresql_db:
     name: "{{ item }}"
   with_items:
     - myapp
     - myauth
 
-- name: create user developer
+- name: 'создание роли developer'
   community.postgresql.postgresql_user:
-    db: myapp
     name: developer
     password: '123'
-    priv: "CONNECT"
 
 

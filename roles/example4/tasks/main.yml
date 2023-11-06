@@ -1,14 +1,10 @@
 
 ---
-- name: access for develor on DB
+- name: 'настройка доступности созданного пользователя только с "С"'
   ansible.builtin.lineinfile:
-    path: /etc/postgresql/14/main/pg_hba.conf
-    line: "host   myauth             developer          192.168.25.134/32                      trust"
-  notify: restart psql
-
-
-- name: access for develor on DB
-  ansible.builtin.lineinfile:
-    path: /etc/postgresql/14/main/pg_hba.conf
-    line: "host   myapp             developer             192.168.25.134/32                     trust"
+    path: "{{ path }}"
+    line: "host   {{ item }}             developer          192.168.25.134/32                      trust"
+  with_items:
+    - myapp
+    - myauth
   notify: restart psql

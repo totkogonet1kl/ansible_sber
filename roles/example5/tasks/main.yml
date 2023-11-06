@@ -2,13 +2,13 @@
 ---
 
 
-- name: install psql in C
+- name: 'установка psql на "С"'
   apt:
     name: ['postgresql','python3-psycopg2']
     state: latest
 
 
-- name: ping myauth
+- name: 'проверка доступности myauth с "С"'
   community.postgresql.postgresql_ping:
     db: myauth
     login_host: 192.168.25.133
@@ -20,7 +20,7 @@
 
 
 
-- name: ping myapp
+- name: 'проверка доступности myapp с "С"'
   community.postgresql.postgresql_ping:
     db: myapp
     login_host: 192.168.25.133
