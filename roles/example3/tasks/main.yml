@@ -20,16 +20,8 @@
     line: "local   all             postgres                                trust"
   notify: restart psql
 
-- name: change pg_hba2
-  ansible.builtin.lineinfile:
-    path: /etc/postgresql/14/main/pg_hba.conf
-    line: "host    all             all              192.168.25.132/32       trust"
-  notify: restart psql
-
-- name: create db myapp
-  community.postgresql.postgresql_db:
-    name: "{{ item }}"
-  with_items:
-    - myapp
-    - myauth
-
+#- name: change pg_hba2
+#  ansible.builtin.lineinfile:
+#    path: /etc/postgresql/14/main/pg_hba.conf
+#    line: "host    all             all              192.168.25.132/32       trust"
+#  notify: restart psql

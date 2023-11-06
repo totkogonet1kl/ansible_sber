@@ -1,0 +1,17 @@
+
+---
+- name: example1
+  hosts: B
+  become: yes
+
+  roles:
+    - example1
+#   - example2
+#   - example3
+
+- name: ex2
+  hosts: B
+  become: yes
+
+  roles:
+    - example2
