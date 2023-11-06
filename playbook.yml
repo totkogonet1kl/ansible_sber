@@ -1,39 +1,31 @@
 
 ---
-- name: Test connect
-  hosts: all
+- name: 'Отключить на "В" авторизацию по паролю'
+  hosts: B
   become: yes
 
-  vars:
-    source_file: ../index.html
-    dest_file: /var/www/html
+  roles:
+    - example1
 
+- name: 'На "В" добавить пользователя DevOps, настроить авторизацию по ключам и предоставить ему доступ "sudo" без пароля. Установка на "В" postgresql и его конифгурирование'
+  hosts: B
+  become: yes
 
-  tasks:
+  roles:
+    - example2
+    - example3_1
 
-  - name: ping servers
-    ping:
+- name: 'Создание БД myapp и myauth и пользователя developer. Настройка доступа к developer только с "С"'
+  hosts: B
+  become: yes
 
-  - name: install apache2
-    apt:
-      name: apache2
-      state: latest
+  roles:
+    - example3_2
+    - example4
 
-  - name: start apache and enable
-    systemd:
-      name: apache2
-      state: started
-      enabled: true
+- name: 'Проверка доступности БД с "С"'
+  hosts: C
+  become: yes
 
-  - name: copy html file
-    copy:
-      src={{ source_file }}
-      dest={{ dest_file }}
-      mode=0555
-    notify: restart apache
-
-  handlers:
-    - name: restart apache
-      service:
-        name: apache2
-        state: restarted
+  roles:
+    - example5
