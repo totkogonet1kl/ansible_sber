@@ -1,13 +1,13 @@
 
 ---
-- name: example1
+- name: 'Отключить на "В" авторизацию по паролю'
   hosts: B
   become: yes
 
   roles:
     - example1
 
-- name: example2 + examle3_1
+- name: 'На "В" добавить пользователя DevOps, настроить авторизацию по ключам и предоставить ему доступ "sudo" без пароля. Установка на "В" postgresql и его конифгурирование'
   hosts: B
   become: yes
 
@@ -15,7 +15,7 @@
     - example2
     - example3
 
-- name: example3_2 + 4
+- name: 'Создание БД myapp и myauth и пользователя developer. Настройка доступа к developer только с "С"'
   hosts: B
   become: yes
 
@@ -23,7 +23,7 @@
     - example3_2
     - example4
 
-- name: example5
+- name: 'Проверка доступности БД с "С"'
   hosts: C
   become: yes
 

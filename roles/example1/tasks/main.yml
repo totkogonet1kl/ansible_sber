@@ -1,13 +1,13 @@
 
 ---
-- name: ssh no password
+- name: 'изменение sshd_config'
   ansible.builtin.lineinfile:
     path: /etc/ssh/sshd_config
     regexp: 'PasswordAuthentication yes'
     line: 'PasswordAuthentication no'
   notify: restart ssh
 
-- name: ssh no password
+- name: 'изменение sshd_config.d/50-cloud-init.conf'
   ansible.builtin.lineinfile:
     path: /etc/ssh/sshd_config.d/50-cloud-init.conf
     regexp: 'PasswordAuthentication yes'

@@ -1,19 +1,19 @@
 
 ---
 
-- name: install psql
+- name: 'установка psql на "В"'
   apt:
     name: ['postgresql','python3-psycopg2']
     state: latest
 
-- name: change postgresql.conf
+- name: 'изменение в postgresql.conf'
   ansible.builtin.lineinfile:
     path: /etc/postgresql/14/main/postgresql.conf
     regexp: "#listen_addresses = 'localhost'"
     line: "listen_addresses = '*'"
   notify: restart psql
 
-- name: change pg_hba
+- name: 'изменение в pg_hba.conf'
   ansible.builtin.lineinfile:
     path: /etc/postgresql/14/main/pg_hba.conf
     regexp: "local   all             postgres                                peer"
