@@ -8,15 +8,14 @@
     password: '$6$B.AxpK8zHtpXIZPP$kStM3EB2ncV0JqDWeI46HGOD4HkBirMdWbLnV6qEwp/p/ZxqsmpafCBcXI825pTTwx4mwQokPXW7QTPy2poXk1'
     generate_ssh_key: yes
 
-- name: ssh-key connect
-  copy:
-    src: /home/god/.ssh/id_rsa.pub
-    dest: /home/DevOps/.ssh/rsa_a
 
-- name:
-  shell: cat /home/DevOps/.ssh/rsa_a >> /home/DevOps/.ssh/authorized_keys
+- name: Set authorized key taken from file
+  ansible.posix.authorized_key:
+    user: DevOps
+    state: present
+    key: "{{ lookup('file', '/home/god/.ssh/id_rsa.pub') }}"
 
 - name: sudo no password
   ansible.builtin.lineinfile:
     path: /etc/sudoers
-    line: 'DevOps ALL=(ALL) NOPASSWD:ALL' 
+    line: 'DevOps ALL=(ALL) NOPASSWD:ALL'
