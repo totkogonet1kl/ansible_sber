@@ -7,9 +7,111 @@
     - myapp
     - myauth
 
+#- name: 'создание роли developer'
+#  community.postgresql.postgresql_user:
+#    db: myauth
+#    name: developer
+#    password: '123'
+
+#- name: ALTER DEFAULT PRIVILEGES ON DATABASE library TO reader, step 1
+#  community.postgresql.postgresql_privs:
+#    db: myauth
+#    objs: TABLES
+#    privs: SELECT
+#    type: default_privs
+#    role: developer
+
+
+#- name: ALTER DEFAULT PRIVILEGES ON DATABASE library TO reader, step 1
+#  community.postgresql.postgresql_privs:
+#    db: postgres
+#    type: database
+#    privs: connect
+#    obj: myauth
+#    role: developer
+
+#- name: ALTER DEFAULT PRIVILEGES ON DATABASE library TO reader, step 1
+#  community.postgresql.postgresql_privs:
+#    db: postgres
+#    state: absent
+#    type: database
+#    privs: connect
+#    obj: myauth
+#    role: developer
+
+
+#- name: privs
+#  community.postgresql.postgresql_privs:
+#    db: myauth
+ ##   state: absent
+ #   privs: CREATE
+ #   type: database
+ #   role: developer
+
+#- name: privs1
+#  community.postgresql.postgresql_privs:
+#    db: myauth
+#    state: present
+#    privs: SELECT
+#    objs: ALL_IN_SCHEMA
+#    type: schema
+#    role: developer
+
+#- name: privs2
+#  community.postgresql.postgresql_privs:
+#    db: myauth
+#    state: absent
+#    privs: INSERT,UPDATE
+#    type: schema
+#    objs: public
+#    role: developer
+
+
+
+- name: 'создание table'
+  community.postgresql.postgresql_query:
+    db: myauth
+    query: create table test (id int);
+
+
+
 - name: 'создание роли developer'
-  community.postgresql.postgresql_user:
-    name: developer
-    password: '123'
+  community.postgresql.postgresql_query:
+    query: 'create user developer '
+
+- name: 'привилегии developer1'
+  community.postgresql.postgresql_query:
+    query: 'grant connect on database myauth to developer'
+
+#- name: 'привилегии developer2'
+#  community.postgresql.postgresql_query:
+#    query: 'grant usage on schema "myauth" to developer'
+
+- name: 'привилегии developer'
+  community.postgresql.postgresql_query:
+    db: myauth
+    query: 'grant select on ALL TABLES IN SCHEMA public to developer'
 
 
+- name: 'привилегии developer'
+  community.postgresql.postgresql_query:
+    db: myauth
+    query: 'revoke create on schema public from public'
+
+
+
+
+
+#- name: Create user
+#  postgresql_user:
+#    db: myapp
+#    name: developer
+ #   password: 23280204sen
+ #   priv: CONNECT/CREATE
+
+#- name: Grant db2
+#  postgresql_user:
+#    db: myauth
+#    name: developer
+#    password: 23280204sen
+#    priv: CONNECT
