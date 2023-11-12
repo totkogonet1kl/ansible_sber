@@ -3,7 +3,7 @@
 - name: 'настройка доступности созданного пользователя только с "С"'
   ansible.builtin.lineinfile:
     path: "{{ path }}"
-    line: "host   {{ item }}             developer          192.168.25.134/32                      trust"
+    line: "host   {{ item }}             developer          192.168.25.134/32                      password"
   with_items:
     - myapp
     - myauth
